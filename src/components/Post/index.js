@@ -18,6 +18,7 @@ export default class Post extends Component {
         <div className="col-md-7 border-bottom pb-3 pb-sm-3">
           <h3 className="mb-2">{this.props.title}</h3>
           <p>{this.props.body}</p>
+          <p>Author: {this.props.author}</p>
           <button className="btn btn-secondary">View</button>
         </div>
       </div>

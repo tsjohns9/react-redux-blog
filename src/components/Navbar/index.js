@@ -23,7 +23,12 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
               {buttons.map(({ location, text }) => (
-                <NavBtn key={text} location={location} text={text} />
+                <NavBtn
+                  key={text}
+                  style="nav-link"
+                  location={location}
+                  text={text}
+                />
               ))}
             </ul>
           </div>

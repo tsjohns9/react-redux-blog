@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const NavBtn = ({ location, text }) => {
+const NavBtn = ({ location, text, style }) => {
   return (
     <li className="nav-item active">
-      <Link to={location} className="nav-link">
+      <Link to={location} className={style}>
         {text}
       </Link>
     </li>

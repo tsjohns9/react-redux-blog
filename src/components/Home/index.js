@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../util/API';
 import Post from '../Post';
+import PageTabs from '../PageTabs';
 
 export default class Home extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    API.getPostsWithImages()
+    // get 1 page of results
+    API.getPostsWithImages(1)
       .then(result => {
         this.setState({ posts: result });
       })
@@ -29,8 +31,10 @@ export default class Home extends Component {
               title={post.title}
               image={post.smallImage}
               body={post.body}
+              author={post.author}
             />
           ))}
+        <PageTabs />
       </div>
     );
   }
