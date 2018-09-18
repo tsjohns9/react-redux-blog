@@ -2,23 +2,36 @@ import React, { Component } from 'react';
 import API from '../../util/API';
 import Post from '../Post';
 import PageTabs from '../PageTabs';
+import { connect } from 'react-redux';
+import { setPage } from '../../redux/actions/setPage';
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { posts: null };
+    this.pageToSearch = () => this.props.pageToSearch + 1;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.pageToSearch !== this.props.pageToSearch) {
+      this.getPosts(this.pageToSearch());
+    }
   }
 
   componentDidMount() {
-    // get 1 page of results
-    API.getPostsWithImages(1)
+    this.getPosts(this.pageToSearch());
+  }
+
+  getPosts = page => {
+    // get specified page from posts
+    API.getPostsWithImages(this.pageToSearch())
       .then(result => {
         this.setState({ posts: result });
       })
       .catch(error => {
         console.log(error);
       });
-  }
+  };
 
   render() {
     console.log(this.state);
@@ -39,3 +52,11 @@ export default class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    pageToSearch: state.activeTab
+  };
+};
+
+export default connect(mapStateToProps)(Home);
