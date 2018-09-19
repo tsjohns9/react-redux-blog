@@ -15,7 +15,7 @@ class LeaveComment extends Component {
     const comment = { postId: this.props.postId, ...this.state };
 
     delete comment.error;
-    console.log(this.textInput);
+
     if (!comment.body) {
       this.textInput.focus();
       this.setState({ error: 'Please fill out the comment field' });

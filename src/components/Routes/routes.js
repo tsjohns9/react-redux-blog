@@ -5,6 +5,7 @@ import Home from '../Home';
 import ViewPost from '../ViewPost';
 import About from '../About';
 import Author from '../Author';
+import CreatePost from '../CreatePost';
 
 const AppRouter = () => (
   <Router>
@@ -13,6 +14,7 @@ const AppRouter = () => (
       <Switch>
         <Route path="/" component={Home} exact={true} />
         <Route path="/about" component={About} exact={true} />
+        <Route path="/create/post" component={CreatePost} exact={true} />
         <Route path="/author/:id" component={Author} exact={true} />
         <Route path="/post/:id" component={ViewPost} exact={true} />
       </Switch>
