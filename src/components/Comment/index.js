@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Comment = ({ name, body }) => {
-  const shortName = new Set(name.split(' ')).values();
-  const first = shortName.next().value;
-  const last = shortName.next().value;
+  const shortName = name.split(' ');
+  const first = shortName[0];
+  const last = shortName[1];
 
   const full = last
     ? first.charAt(0).toUpperCase() +

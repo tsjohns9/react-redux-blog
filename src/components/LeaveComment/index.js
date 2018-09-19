@@ -5,21 +5,37 @@ import { addComment } from '../../redux/actions/actions';
 class LeaveComment extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: '', email: '', body: '' };
+    this.state = { name: '', email: '', body: '', error: null };
   }
+
+  textInput = null;
 
   addComment = e => {
     e.preventDefault();
     const comment = { postId: this.props.postId, ...this.state };
+
+    delete comment.error;
+    console.log(this.textInput);
+    if (!comment.body) {
+      this.textInput.focus();
+      this.setState({ error: 'Please fill out the comment field' });
+      return;
+    }
+
     if (!comment.name) {
       comment.name = 'Anonymous User';
     }
+
     this.props.dispatch(addComment(comment));
     this.props.postComment(comment);
+    this.setState({ name: '', email: '', body: '', error: null });
   };
 
   handleInputChange = event => {
     const { value, name } = event.target;
+    if (name === 'body' && value) {
+      this.setState({ [name]: value, error: null });
+    }
     this.setState({ [name]: value });
   };
 
@@ -63,8 +79,11 @@ class LeaveComment extends Component {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="inputTextArea">Comment</label>
+            <label htmlFor="inputTextArea">
+              Comment <small>(required)</small>
+            </label>
             <textarea
+              ref={element => (this.textInput = element)}
               value={this.state.body}
               onChange={this.handleInputChange}
               name="body"
@@ -72,6 +91,7 @@ class LeaveComment extends Component {
               id="inputTextArea"
               rows="3"
             />
+            {this.state.error && <p className="text-danger">{this.state.error}</p>}
           </div>
           <button onClick={this.addComment} className="btn btn-primary shadow">
             Post Comment
