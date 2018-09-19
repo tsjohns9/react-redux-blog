@@ -12,6 +12,7 @@ class ViewPost extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { id } = this.props.match.params;
     this.getOnePost(id);
   }

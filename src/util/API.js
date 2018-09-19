@@ -82,7 +82,9 @@ API.getPostsWithImages = pageNumber => {
                 posts.forEach((post, index) => {
                   post.smallImage = images[index].thumbnailUrl;
                   post.bigImage = images[index].url;
-                  post.author = authors[post.userId].name;
+                  post.author = authors.filter(
+                    ({ id }) => post.userId == id
+                  )[0].name;
                   post.title =
                     post.title.charAt(0).toUpperCase() + post.title.slice(1);
                   post.body = post.body.charAt(0).toUpperCase() + post.body.slice(1);

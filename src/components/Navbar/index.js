@@ -55,6 +55,7 @@ class Navbar extends Component {
                   <Link
                     to="/about"
                     className="nav-link bg-danger text-white nav-transition shadow-hover"
+                    style={{ borderBottom: 'solid 1px transparent' }}
                   >
                     About Me
                   </Link>

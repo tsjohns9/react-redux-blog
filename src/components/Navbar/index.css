@@ -41,7 +41,7 @@
 }
 
 .active-nav {
-  color: black;
+  color: black !important;
   border-bottom: solid 1px black;
 }
 
