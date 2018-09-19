@@ -11,6 +11,24 @@ API.getPosts = pageNumber => {
   });
 };
 
+API.getOnePost = postId => {
+  return new Promise((resolve, reject) => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts${postId}`)
+      .then(response => response.json())
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+API.getPostComments = postId => {
+  return new Promise((resolve, reject) => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+      .then(response => response.json())
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
 API.getImages = () => {
   return new Promise((resolve, reject) => {
     return fetch('https://jsonplaceholder.typicode.com/photos?_page=1')
@@ -42,10 +60,13 @@ API.getPostsWithImages = pageNumber => {
                   post.bigImage = images[index].url;
                   post.author = authors[post.userId].name;
                   post.title =
+                    post.title.charAt(0).toUpperCase() + post.title.slice(1);
+                  post.body = post.body.charAt(0).toUpperCase() + post.body.slice(1);
+                  post.shortTitle =
                     post.title.length > 15
                       ? post.title.slice(0, 15).trim() + '...'
                       : post.title;
-                  post.body =
+                  post.shortBody =
                     post.body.length > 30
                       ? post.body.slice(0, 30).trim() + '...'
                       : post.body;
@@ -58,6 +79,18 @@ API.getPostsWithImages = pageNumber => {
       })
       .catch(reject);
   });
+};
+
+API.createComment = comment => {
+  fetch('https://jsonplaceholder.typicode.com/comments', {
+    method: 'POST',
+    ...comment,
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8'
+    }
+  })
+    .then(response => response.json())
+    .then(json => console.log(json));
 };
 
 export default API;

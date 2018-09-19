@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AppRouter from './components/Routes/routes';
 import { Provider } from 'react-redux';
 import configureStore from './redux/store/configureStore';
-import { setPage } from './redux/actions/setPage';
+import { setPage } from './redux/actions/actions';
 
 const store = configureStore();
 

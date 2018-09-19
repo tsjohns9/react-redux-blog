@@ -3,7 +3,7 @@ import API from '../../util/API';
 import Post from '../Post';
 import PageTabs from '../PageTabs';
 import { connect } from 'react-redux';
-import { setPage } from '../../redux/actions/setPage';
+import { setPage, setPosts } from '../../redux/actions/actions';
 
 class Home extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class Home extends Component {
     // get specified page from posts
     API.getPostsWithImages(this.pageToSearch())
       .then(result => {
+        this.props.dispatch(setPosts(result));
         this.setState({ posts: result });
       })
       .catch(error => {
@@ -34,21 +35,25 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.state);
+    if (!this.state.posts) {
+      return <div className="loader" />;
+    }
     return (
-      <div className="container">
+      <section className="container">
         {this.state.posts &&
           this.state.posts.map(post => (
             <Post
               key={post.title}
-              title={post.title}
+              title={post.shortTitle}
               image={post.smallImage}
-              body={post.body}
+              body={post.shortBody}
               author={post.author}
+              id={post.id}
+              allData={post}
             />
           ))}
         <PageTabs />
-      </div>
+      </section>
     );
   }
 }

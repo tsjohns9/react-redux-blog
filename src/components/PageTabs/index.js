@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Tab from './Tab';
 import { connect } from 'react-redux';
-import { setPage } from '../../redux/actions/setPage';
+import { setPage } from '../../redux/actions/actions';
 
 class PageTabs extends Component {
   constructor(props) {

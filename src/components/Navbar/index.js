@@ -10,18 +10,18 @@ const buttons = [
 
 const Navbar = () => {
   return (
-    <Fragment>
+    <header>
       <nav
         style={{ fontSize: '17px' }}
-        className="navbar navbar-expand navbar-dark bg-primary"
+        className="navbar navbar-expand navbar-dark bg-primary mb-5"
       >
         <div className="container">
           <Link to="/" className="navbar-brand">
-            Navbar
+            My Blog
           </Link>
 
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ml-auto">
+            <ul role="navigation" className="navbar-nav ml-auto">
               {buttons.map(({ location, text }) => (
                 <NavBtn
                   key={text}
@@ -34,7 +34,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-    </Fragment>
+    </header>
   );
 };
 

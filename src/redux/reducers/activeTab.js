@@ -1,5 +1,3 @@
-// Expenses Reducer
-
 const defaultState = 0;
 
 export default (state = defaultState, action) => {
