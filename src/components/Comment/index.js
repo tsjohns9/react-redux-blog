@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Comment = ({ name, body }) => {
   const shortName = new Set(name.split(' ')).values();

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Tab = ({ text, index, setActiveTab, activeTab }) => {
   return (

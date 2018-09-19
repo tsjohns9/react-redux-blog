@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PostContext from '../Home/PostContext';
 
 export default class Post extends Component {
   constructor(props) {
@@ -21,12 +20,7 @@ export default class Post extends Component {
           <h3 className="mb-2">{this.props.title}</h3>
           <p>{this.props.body}</p>
           <p>Author: {this.props.author}</p>
-          <Link
-            to={{
-              pathname: `/post/${this.props.id}`,
-              state: this.props.allData
-            }}
-          >
+          <Link to={`/post/${this.props.id}`}>
             <button className="btn btn-secondary">View</button>
           </Link>
         </div>

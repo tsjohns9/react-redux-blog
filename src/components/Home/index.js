@@ -3,7 +3,6 @@ import API from '../../util/API';
 import Post from '../Post';
 import PageTabs from '../PageTabs';
 import { connect } from 'react-redux';
-import { setPage, setPosts } from '../../redux/actions/actions';
 
 class Home extends Component {
   constructor(props) {
@@ -26,7 +25,6 @@ class Home extends Component {
     // get specified page from posts
     API.getPostsWithImages(this.pageToSearch())
       .then(result => {
-        this.props.dispatch(setPosts(result));
         this.setState({ posts: result });
       })
       .catch(error => {
@@ -49,7 +47,7 @@ class Home extends Component {
               body={post.shortBody}
               author={post.author}
               id={post.id}
-              allData={post}
+              {...this.props}
             />
           ))}
         <PageTabs />

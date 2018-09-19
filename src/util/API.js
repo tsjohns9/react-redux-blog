@@ -1,19 +1,8 @@
-import { trimExt } from 'upath';
-
 const API = {};
 
 API.getPosts = pageNumber => {
   return new Promise((resolve, reject) => {
     return fetch(`https://jsonplaceholder.typicode.com/posts?_page=${pageNumber}`)
-      .then(response => response.json())
-      .then(resolve)
-      .catch(reject);
-  });
-};
-
-API.getOnePost = postId => {
-  return new Promise((resolve, reject) => {
-    return fetch(`https://jsonplaceholder.typicode.com/posts${postId}`)
       .then(response => response.json())
       .then(resolve)
       .catch(reject);
@@ -29,20 +18,56 @@ API.getPostComments = postId => {
   });
 };
 
-API.getImages = () => {
+API.getImages = (image = '?_page=1') => {
   return new Promise((resolve, reject) => {
-    return fetch('https://jsonplaceholder.typicode.com/photos?_page=1')
+    return fetch(`https://jsonplaceholder.typicode.com/photos/${image}`)
       .then(response => response.json())
       .then(resolve)
       .catch(reject);
   });
 };
 
-API.getAuthors = authorId => {
+API.getAuthors = (authorId = '') => {
   return new Promise((resolve, reject) => {
-    return fetch(`https://jsonplaceholder.typicode.com/users/`)
+    return fetch(`https://jsonplaceholder.typicode.com/users/${authorId}`)
       .then(response => response.json())
       .then(resolve)
+      .catch(reject);
+  });
+};
+
+API.getOnePost = postId => {
+  return new Promise((resolve, reject) => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+      .then(response => response.json())
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+API.getPostWithComments = (postId, userId) => {
+  return new Promise((resolve, reject) => {
+    API.getOnePost(postId)
+      .then(post => {
+        post.body = post.body.charAt(0).toUpperCase() + post.body.slice(1);
+        API.getAuthors(post.userId)
+          .then(author => {
+            post.author = author.name;
+            API.getImages(postId)
+              .then(image => {
+                post.bigImage = image.url;
+                API.getPostComments(postId)
+                  .then(comments => {
+                    post.comments = comments;
+                    console.log(post);
+                    resolve(post);
+                  })
+                  .catch(reject);
+              })
+              .catch(reject);
+          })
+          .catch(reject);
+      })
       .catch(reject);
   });
 };
@@ -82,15 +107,18 @@ API.getPostsWithImages = pageNumber => {
 };
 
 API.createComment = comment => {
-  fetch('https://jsonplaceholder.typicode.com/comments', {
-    method: 'POST',
-    ...comment,
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8'
-    }
-  })
-    .then(response => response.json())
-    .then(json => console.log(json));
+  return new Promise((resolve, reject) => {
+    fetch('https://jsonplaceholder.typicode.com/comments', {
+      method: 'POST',
+      body: JSON.stringify({ ...comment }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => response.json())
+      .then(resolve)
+      .catch(reject);
+  });
 };
 
 export default API;

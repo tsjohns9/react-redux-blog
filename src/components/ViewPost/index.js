@@ -1,66 +1,71 @@
 import React, { Component } from 'react';
 import API from '../../util/API';
-import Post from '../Post';
-import PageTabs from '../PageTabs';
-import { connect } from 'react-redux';
-import { setPage } from '../../redux/actions/actions';
 import { Link } from 'react-router-dom';
 import Comment from '../Comment';
 import LeaveComment from '../LeaveComment';
-import { getPost } from '../../redux/actions/actions';
 
 class ViewPost extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.data = this.props.location.state;
+    this.state = { post: null, comments: null };
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.pageToSearch !== this.props.pageToSearch) {
-  //     this.getPosts(this.pageToSearch());
-  //   }
-  // }
 
   componentDidMount() {
-    this.getPostComments(this.data.id);
+    const { id } = this.props.match.params;
+    this.getOnePost(id);
   }
 
-  getPostComments = postId => {
-    API.getPostComments(postId)
+  postComment = comment => {
+    this.setState(() => ({ comments: [...this.state.comments, comment] }));
+    API.createComment(comment)
       .then(result => {
-        this.setState({ comments: result });
+        console.log(result);
       })
       .catch(error => {
         console.log(error);
       });
   };
 
+  getOnePost = postId => {
+    API.getPostWithComments(postId)
+      .then(post => {
+        const { comments } = post;
+        this.setState({ post, comments });
+      })
+      .catch(error => {
+        this.setState({ error: 'An error occured while retrieving the post' });
+      });
+  };
+
   render() {
-    console.log(this.state);
+    if (!this.state.post) {
+      return <div className="loader" />;
+    }
+    const { bigImage, title, userId, author, body, id } = this.state.post;
     return (
       <section className="container">
         <img
           className=" img-fluid float-none float-md-left mb-5 mb-md-0 mr-md-5"
-          src={this.data.bigImage}
+          src={bigImage}
+          alt={title}
         />
         <aside className="clearfix mb-5">
-          <h1 className="mb-4">{this.data.title}</h1>
-          <Link to={`/author/${this.data.userId}`}>
-            <p>Written by {this.data.author}</p>
+          <h1 className="mb-4">{title}</h1>
+          <Link to={`/author/${userId}`}>
+            <p>Written by {author}</p>
           </Link>
-          <p>{this.data.body}</p>
+          <p>{body}</p>
         </aside>
         {this.state.comments && (
           <div>
             <h3>This post has {this.state.comments.length} comments</h3>
             <hr />
-            {this.state.comments.map(({ id, name, body }) => (
-              <Comment key={id} name={name} body={body} />
+            {this.state.comments.map(({ id, name, body }, index) => (
+              <Comment key={index} name={name} body={body} />
             ))}
           </div>
         )}
-        <LeaveComment />
+        <LeaveComment postComment={this.postComment} postId={id} />
       </section>
     );
   }
