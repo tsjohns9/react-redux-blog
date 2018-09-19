@@ -25,12 +25,21 @@ class CreatePost extends Component {
 
   addPost = e => {
     e.preventDefault();
+
     const post = {
       id: 51,
       userId: 1,
+      author: 'Leanne Graham',
+      shortBody: '',
+      smallImage: 'https://via.placeholder.com/150/56a8c2',
+      bigImage: 'https://via.placeholder.com/600/56a8c2',
       body: this.state.body,
       title: this.state.title
     };
+    post.shortTitle =
+      post.title.length > 15 ? post.title.slice(0, 15).trim() + '...' : post.title;
+    post.shortBody =
+      post.body.length > 30 ? post.body.slice(0, 30).trim() + '...' : post.body;
 
     if (!post.title) {
       this.titleInput.focus();
@@ -67,7 +76,6 @@ class CreatePost extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <section className="container">
         <h2>Have something to say? Share it below!</h2>

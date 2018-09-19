@@ -9,6 +9,7 @@ class Home extends Component {
     super(props);
     this.state = { posts: null };
     this.pageToSearch = () => this.props.pageToSearch + 1;
+    this.userPosts = this.props.userPosts;
   }
 
   componentDidUpdate(prevProps) {
@@ -22,11 +23,12 @@ class Home extends Component {
     this.getPosts(this.pageToSearch());
   }
 
-  getPosts = page => {
+  getPosts = () => {
     // get specified page from posts
     API.getPostsWithImages(this.pageToSearch())
       .then(result => {
-        this.setState({ posts: result });
+        console.log(result);
+        this.setState({ posts: [...this.userPosts, ...result].slice(0, 9) });
       })
       .catch(error => {
         console.log(error);
@@ -59,7 +61,8 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    pageToSearch: state.activeTab
+    pageToSearch: state.activeTab,
+    userPosts: state.posts
   };
 };
 

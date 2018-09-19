@@ -30,10 +30,18 @@ class ViewPost extends Component {
     API.getPostWithComments(postId)
       .then(post => {
         const { comments } = post;
+        const { userPost } = this.props;
+        console.log(this.props.userPost);
         if (this.props.comments.length) {
-          this.setState({ post, comments: [...comments, ...this.props.comments] });
+          this.setState({
+            post: userPost ? userPost : post,
+            comments: [...comments, ...this.props.comments]
+          });
         } else {
-          this.setState({ post, comments: [...comments] });
+          this.setState({
+            post: userPost ? userPost : post,
+            comments: [...comments]
+          });
         }
       })
       .catch(error => {
@@ -80,7 +88,8 @@ class ViewPost extends Component {
 const mapStateToProps = (state, props) => {
   const { id } = props.match.params;
   return {
-    comments: state.comments.filter(({ postId }) => postId == id)
+    comments: state.comments.filter(({ postId }) => postId == id),
+    userPost: state.posts.filter(({ id: post }) => post == id)[0]
   };
 };
 
