@@ -5,7 +5,7 @@
 }
 
 .nav-transition {
-  webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -34,6 +34,15 @@
   transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out,
     ease-in-out;
   transition-delay: 0s, 0s, 0s, 0s, 0s;
+}
+
+.nav-transition:hover {
+  border-bottom: solid 1px transparent;
+}
+
+.active-nav {
+  color: black;
+  border-bottom: solid 1px black;
 }
 
 .header-img {

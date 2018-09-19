@@ -12,7 +12,7 @@ export default class About extends Component {
       <section className="container">
         <h2 className="text-center mb-3">Why Me?</h2>
         <div className="row">
-          <div className="col-md-6 bg-1" />
+          <div className="col-md-6 bg-1 shadow" />
           <div className="col-md-6">
             <p>
               I am a web application developer with a raging hunger for success. I

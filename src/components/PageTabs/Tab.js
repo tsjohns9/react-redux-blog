@@ -2,9 +2,9 @@ import React from 'react';
 
 const Tab = ({ text, index, setActiveTab, activeTab }) => {
   return (
-    <li onClick={() => setActiveTab(index)} className="page-item">
+    <li onClick={() => setActiveTab(index)} className="page-item shadow-hover">
       <span
-        className={`page-link ${index === activeTab ? 'bg-danger text-white' : ''}`}
+        className={`page-link ${index === activeTab ? 'bg-primary text-white' : ''}`}
       >
         {text}
       </span>

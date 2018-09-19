@@ -59,7 +59,6 @@ API.getPostWithComments = (postId, userId) => {
                 API.getPostComments(postId)
                   .then(comments => {
                     post.comments = comments;
-                    console.log(post);
                     resolve(post);
                   })
                   .catch(reject);

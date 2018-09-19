@@ -33,7 +33,7 @@ class PageTabs extends Component {
     return (
       <div>
         <ul className="pagination mx-auto">
-          <li onClick={this.activeTabMinusOne} className="page-item">
+          <li onClick={this.activeTabMinusOne} className="page-item shadow-hover">
             <a className="page-link">&laquo;</a>
           </li>
           {this.tabs.map((tab, index) => (
@@ -45,7 +45,7 @@ class PageTabs extends Component {
               activeTab={this.activeTab()}
             />
           ))}
-          <li onClick={this.activeTabPlusOne} className="page-item">
+          <li onClick={this.activeTabPlusOne} className="page-item shadow-hover">
             <a className="page-link">&raquo;</a>
           </li>
         </ul>

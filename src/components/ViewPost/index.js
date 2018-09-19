@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../util/API';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Comment from '../Comment';
 import LeaveComment from '../LeaveComment';
 
@@ -18,9 +19,7 @@ class ViewPost extends Component {
   postComment = comment => {
     this.setState(() => ({ comments: [...this.state.comments, comment] }));
     API.createComment(comment)
-      .then(result => {
-        console.log(result);
-      })
+      .then()
       .catch(error => {
         console.log(error);
       });
@@ -30,7 +29,11 @@ class ViewPost extends Component {
     API.getPostWithComments(postId)
       .then(post => {
         const { comments } = post;
-        this.setState({ post, comments });
+        if (this.props.comments.length) {
+          this.setState({ post, comments: [...comments, ...this.props.comments] });
+        } else {
+          this.setState({ post, comments: [...comments] });
+        }
       })
       .catch(error => {
         this.setState({ error: 'An error occured while retrieving the post' });
@@ -45,7 +48,7 @@ class ViewPost extends Component {
     return (
       <section className="container">
         <img
-          className=" img-fluid float-none float-md-left mb-5 mb-md-0 mr-md-5"
+          className=" img-fluid float-none float-md-left mb-5 mb-md-0 mr-md-5 shadow"
           src={bigImage}
           alt={title}
         />
@@ -71,4 +74,13 @@ class ViewPost extends Component {
   }
 }
 
-export default ViewPost;
+// export default ViewPost;
+
+const mapStateToProps = (state, props) => {
+  const { id } = props.match.params;
+  return {
+    comments: state.comments.filter(({ postId }) => postId == id)
+  };
+};
+
+export default connect(mapStateToProps)(ViewPost);

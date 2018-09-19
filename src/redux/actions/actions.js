@@ -3,12 +3,12 @@ export const setPage = (page = 0) => ({
   page
 });
 
-export const setPosts = posts => ({
-  type: 'SET_POSTS',
-  posts
+export const addComment = comment => ({
+  type: 'ADD_COMMENT',
+  comment
 });
 
-export const getPost = postId => ({
-  type: 'GET_POST',
-  postId
-});
+// export const getCommentsByPostId = postId => ({
+//   type: 'GET_COMMENTS_BY_ID',
+//   postId
+// });

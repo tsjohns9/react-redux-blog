@@ -13,7 +13,11 @@ export default class Post extends Component {
     return (
       <article className="row my-5 pb-4 text-center text-md-left">
         <div className="col-md-5 mb-3 mb-sm-3">
-          <img className="img-fluid" src={this.props.image} alt={this.props.title} />
+          <img
+            className="img-fluid shadow"
+            src={this.props.image}
+            alt={this.props.title}
+          />
         </div>
 
         <div className="col-md-7 border-bottom pb-3 pb-sm-3">
@@ -21,7 +25,7 @@ export default class Post extends Component {
           <p>{this.props.body}</p>
           <p>Author: {this.props.author}</p>
           <Link to={`/post/${this.props.id}`}>
-            <button className="btn btn-secondary">View</button>
+            <button className="btn btn-secondary shadow-hover">View</button>
           </Link>
         </div>
       </article>

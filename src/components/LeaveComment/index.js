@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addComment } from '../../redux/actions/actions';
 
 class LeaveComment extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class LeaveComment extends Component {
     if (!comment.name) {
       comment.name = 'Anonymous User';
     }
+    this.props.dispatch(addComment(comment));
     this.props.postComment(comment);
   };
 
@@ -65,12 +68,12 @@ class LeaveComment extends Component {
               value={this.state.body}
               onChange={this.handleInputChange}
               name="body"
-              className="form-control"
+              className="form-control "
               id="inputTextArea"
               rows="3"
             />
           </div>
-          <button onClick={this.addComment} className="btn btn-primary">
+          <button onClick={this.addComment} className="btn btn-primary shadow">
             Post Comment
           </button>
         </form>
@@ -79,4 +82,4 @@ class LeaveComment extends Component {
   }
 }
 
-export default LeaveComment;
+export default connect()(LeaveComment);

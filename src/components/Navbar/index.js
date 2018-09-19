@@ -1,30 +1,23 @@
 import './index.css';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import NavBtn from './NavBtn';
-
-const buttons = [
-  { location: '/', text: 'Home', style: 'nav-link btn-secondary nav-transition' },
-  {
-    location: '/create/post',
-    text: 'New Post',
-    style: 'nav-link btn-secondary nav-transition'
-  },
-  {
-    location: '/about',
-    text: 'About Me',
-    style: 'nav-link bg-danger text-white nav-transition'
-  }
-];
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { reveal: false };
     this.location = () => window.location.pathname;
+    this.state = { reveal: false, active: this.location() };
   }
 
   reveal = () => this.setState({ reveal: !this.state.reveal });
+
+  componentDidUpdate() {
+    if (this.state.active !== this.location()) {
+      this.setState({
+        active: this.location()
+      });
+    }
+  }
 
   render() {
     return (
@@ -40,9 +33,32 @@ class Navbar extends Component {
 
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul role="navigation" className="navbar-nav ml-auto">
-                {buttons.map(({ location, text, style }) => (
-                  <NavBtn key={text} style={style} location={location} text={text} />
-                ))}
+                <li className="nav-item">
+                  <Link
+                    to="/"
+                    className={`nav-link btn-secondary nav-transition shadow-hover ${this
+                      .state.active === '/' && 'active-nav'}`}
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/create/post"
+                    className={`nav-link btn-secondary nav-transition shadow-hover ${this
+                      .state.active === '/create/post' && 'active-nav'}`}
+                  >
+                    New Post
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/about"
+                    className="nav-link bg-danger text-white nav-transition shadow-hover"
+                  >
+                    About Me
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
