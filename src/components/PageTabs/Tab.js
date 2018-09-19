@@ -4,12 +4,7 @@ const Tab = ({ text, index, setActiveTab, activeTab }) => {
   return (
     <li onClick={() => setActiveTab(index)} className="page-item">
       <span
-        className="page-link"
-        style={{
-          color: index === activeTab && 'white',
-          backgroundColor: index === activeTab && '#008cba',
-          borderColor: index === activeTab && '#0079a1'
-        }}
+        className={`page-link ${index === activeTab ? 'bg-danger text-white' : ''}`}
       >
         {text}
       </span>

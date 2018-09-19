@@ -5,12 +5,13 @@ const Comment = ({ name, body }) => {
   const first = shortName.next().value;
   const last = shortName.next().value;
 
-  const full =
-    first.charAt(0).toUpperCase() +
-    first.slice(1) +
-    ' ' +
-    last.charAt(0).toUpperCase() +
-    last.slice(1);
+  const full = last
+    ? first.charAt(0).toUpperCase() +
+      first.slice(1) +
+      ' ' +
+      last.charAt(0).toUpperCase() +
+      last.slice(1)
+    : first.charAt(0).toUpperCase() + first.slice(1);
 
   return (
     <div style={{ borderBottom: '1px solid #eee' }}>

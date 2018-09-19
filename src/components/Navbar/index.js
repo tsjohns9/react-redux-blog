@@ -1,41 +1,79 @@
-import React, { Fragment } from 'react';
+import './index.css';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import NavBtn from './NavBtn';
 
 const buttons = [
-  { location: '/', text: 'Home' },
-  { location: '/create/post', text: 'New Post' },
-  { location: '/about', text: 'About Me' }
+  { location: '/', text: 'Home', style: 'nav-link btn-secondary nav-transition' },
+  {
+    location: '/create/post',
+    text: 'New Post',
+    style: 'nav-link btn-secondary nav-transition'
+  },
+  {
+    location: '/about',
+    text: 'About Me',
+    style: 'nav-link bg-danger text-white nav-transition'
+  }
 ];
 
-const Navbar = () => {
-  return (
-    <header>
-      <nav
-        style={{ fontSize: '17px' }}
-        className="navbar navbar-expand navbar-dark bg-primary mb-5"
-      >
-        <div className="container">
-          <Link to="/" className="navbar-brand">
-            My Blog
-          </Link>
+class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { reveal: false };
+    this.location = () => window.location.pathname;
+  }
 
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul role="navigation" className="navbar-nav ml-auto">
-              {buttons.map(({ location, text }) => (
-                <NavBtn
-                  key={text}
-                  style="nav-link"
-                  location={location}
-                  text={text}
-                />
-              ))}
-            </ul>
+  reveal = () => this.setState({ reveal: !this.state.reveal });
+
+  render() {
+    return (
+      <header className="header mb-5">
+        <nav
+          style={{ fontSize: '17px' }}
+          className="navbar navbar-expand navbar-light bg-white"
+        >
+          <div className="container">
+            <Link to="/" className="navbar-brand">
+              Trevor Johnson
+            </Link>
+
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul role="navigation" className="navbar-nav ml-auto">
+                {buttons.map(({ location, text, style }) => (
+                  <NavBtn key={text} style={style} location={location} text={text} />
+                ))}
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div className="header-img ">
+          <div className="overlay">
+            <div className="text-center text-white">
+              <h1 className="text-white">
+                {this.location() === '/about' ? 'Trevor Johnson' : 'Hire Smart'}
+              </h1>
+              <p className="my-3" style={{ fontSize: '17px' }}>
+                {this.location() === '/about'
+                  ? 'Web Application Developer'
+                  : 'Make an informed decision about the talent you want to employ'}
+              </p>
+              <button onClick={this.reveal} className="btn btn-danger my-3">
+                Contact
+              </button>
+              <div
+                className={`${this.state.reveal ? 'fade' : ''}`}
+                style={{ fontSize: '19px', opacity: 0 }}
+              >
+                <p>602 481 4816</p>
+                <p>johnsontrevor55@gmail.com</p>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
-    </header>
-  );
-};
+      </header>
+    );
+  }
+}
 
 export default Navbar;

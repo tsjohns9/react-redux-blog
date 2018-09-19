@@ -32,7 +32,7 @@ class PageTabs extends Component {
     console.log(this.props);
     return (
       <div>
-        <ul className="pagination">
+        <ul className="pagination mx-auto">
           <li onClick={this.activeTabMinusOne} className="page-item">
             <a className="page-link">&laquo;</a>
           </li>
