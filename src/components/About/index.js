@@ -4,10 +4,31 @@ import React, { Component } from 'react';
 export default class About extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: null };
+    this.state = { count: 2 };
   }
 
+  interval = null;
+
+  componentDidMount() {
+    this.interval = this.timer();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  timer = () => {
+    return setInterval(() => {
+      if (this.state.count < 5) {
+        this.setState({ count: this.state.count + 1 });
+      } else {
+        this.setState({ count: 2 });
+      }
+    }, 4500);
+  };
+
   render() {
+    console.log(this.state);
     return (
       <section className="container">
         <h2 className="text-center mb-3">Why Me?</h2>
@@ -41,6 +62,20 @@ export default class About extends Component {
               MongoDB, CSS, HTML, Git, Bash, and NodeJS.
             </p>
           </div>
+        </div>
+        <h2>For Fun</h2>
+        <div className="row">
+          <div className="col-md-6">
+            <p>
+              Apart from developing, I enjoy spending time with my family. I am the
+              oldest of 6 kids, and I have a lot of cousins. In my free time I also
+              enjoy working out, hiking, playing chess, and going to the lake. I also
+              really enjoy country music. My favorite country artist is George
+              Strait, and some others that I enjoy a lot are Brad Paisley, and Josh
+              Turner.
+            </p>
+          </div>
+          <div className={`bg-${this.state.count} col-md-6 shadow`} />
         </div>
       </section>
     );

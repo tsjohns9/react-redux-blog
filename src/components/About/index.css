@@ -5,3 +5,31 @@
   background-position: center center;
   background-image: url('me.jpg');
 }
+.bg-2 {
+  height: 600px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('family.jpg');
+}
+.bg-3 {
+  height: 600px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('bros.JPG');
+}
+.bg-4 {
+  height: 600px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('ireland.JPG');
+}
+.bg-5 {
+  height: 600px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('withmom.jpg');
+}
