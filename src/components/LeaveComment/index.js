@@ -5,7 +5,7 @@ import { addComment } from '../../redux/actions/actions';
 class LeaveComment extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: '', email: '', body: '', error: null };
+    this.state = { name: '', email: '', body: '', error: null, success: false };
   }
 
   // gets the text are input for error checking. used for a ref.
@@ -18,6 +18,7 @@ class LeaveComment extends Component {
     const comment = { postId: this.props.postId, ...this.state };
 
     delete comment.error;
+    delete comment.success;
 
     // error checking
     if (!comment.body) {
@@ -34,16 +35,16 @@ class LeaveComment extends Component {
     // saves data to store. clears form.
     this.props.dispatch(addComment(comment));
     this.props.postComment(comment);
-    this.setState({ name: '', email: '', body: '', error: null });
+    this.setState({ name: '', email: '', body: '', error: null, success: true });
   };
 
   // gets form values on change and sets in state. clears errors if valid.
   handleInputChange = event => {
     const { value, name } = event.target;
     if (name === 'body' && value) {
-      this.setState({ [name]: value, error: null });
+      this.setState({ [name]: value, error: null, success: false });
     }
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, success: false });
   };
 
   render() {
@@ -99,6 +100,7 @@ class LeaveComment extends Component {
               rows="3"
             />
             {this.state.error && <p className="text-danger">{this.state.error}</p>}
+            {this.state.success && <p className="text-success">SUCCESS</p>}
           </div>
           <button onClick={this.addComment} className="btn btn-primary shadow">
             Post Comment

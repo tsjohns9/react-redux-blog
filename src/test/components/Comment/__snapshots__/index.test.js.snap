@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header correctly 1`] = `
+<div
+  style={
+    Object {
+      "borderBottom": "1px solid #eee",
+    }
+  }
+>
+  <p
+    className="my-4"
+  >
+    <b>
+      Trevor Johnson
+    </b>
+  </p>
+  <p>
+    adsf fdsa kmckd ak;iw
+  </p>
+</div>
+`;
