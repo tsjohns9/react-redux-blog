@@ -8,6 +8,7 @@ export default class Author extends Component {
     this.state = { author: null };
   }
 
+  // gets author specific information from API
   componentDidMount() {
     window.scrollTo(0, 0);
     const { id } = this.props.match.params;

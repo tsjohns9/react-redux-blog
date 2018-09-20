@@ -19,6 +19,7 @@ class CreatePost extends Component {
     window.scrollTo(0, 0);
   }
 
+  // used to focus input fields if there is an error with a ref
   titleInput = null;
   textInput = null;
   form = null;
@@ -26,6 +27,7 @@ class CreatePost extends Component {
   addPost = e => {
     e.preventDefault();
 
+    // sets the values for the post to save in the redux store
     const post = {
       id: 51,
       userId: 1,
@@ -41,6 +43,7 @@ class CreatePost extends Component {
     post.shortBody =
       post.body.length > 30 ? post.body.slice(0, 30).trim() + '...' : post.body;
 
+    // error checking
     if (!post.title) {
       this.titleInput.focus();
       this.setState({ titleErr: 'Please add a title' });
@@ -53,6 +56,7 @@ class CreatePost extends Component {
       return;
     }
 
+    // clears form and state on success
     this.props.dispatch(addPost(post));
     this.setState({
       title: '',
@@ -64,6 +68,7 @@ class CreatePost extends Component {
     this.form.reset();
   };
 
+  // gets values from form on change. clears errors if valid.
   onChange = event => {
     const { value, name } = event.target;
     if (name === 'body' && value) {

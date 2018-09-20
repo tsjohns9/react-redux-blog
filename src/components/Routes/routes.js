@@ -7,6 +7,7 @@ import About from '../About';
 import Author from '../Author';
 import CreatePost from '../CreatePost';
 
+// handles all routes for the app
 const AppRouter = () => (
   <Router>
     <div className="pb-5">

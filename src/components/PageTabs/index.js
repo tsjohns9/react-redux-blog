@@ -10,10 +10,13 @@ class PageTabs extends Component {
     this.activeTab = () => this.props.activeTab;
   }
 
+  // define the number of pages to use
   tabs = [1, 2, 3, 4, 5];
 
+  // saves the active status to the store so the home page can update when this component changes
   setActiveTab = index => this.props.dispatch(setPage(index));
 
+  // sets the active status on the pagination tab
   activeTabPlusOne = () => {
     const tab = this.activeTab();
     if (tab < 4) {

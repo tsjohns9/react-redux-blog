@@ -8,29 +8,36 @@ class LeaveComment extends Component {
     this.state = { name: '', email: '', body: '', error: null };
   }
 
+  // gets the text are input for error checking. used for a ref.
   textInput = null;
 
+  // used to post a comment
   addComment = e => {
     e.preventDefault();
+    // sets the values that will be saved in the store for the comment
     const comment = { postId: this.props.postId, ...this.state };
 
     delete comment.error;
 
+    // error checking
     if (!comment.body) {
       this.textInput.focus();
       this.setState({ error: 'Please fill out the comment field' });
       return;
     }
 
+    // sets default name if not provided
     if (!comment.name) {
       comment.name = 'Anonymous User';
     }
 
+    // saves data to store. clears form.
     this.props.dispatch(addComment(comment));
     this.props.postComment(comment);
     this.setState({ name: '', email: '', body: '', error: null });
   };
 
+  // gets form values on change and sets in state. clears errors if valid.
   handleInputChange = event => {
     const { value, name } = event.target;
     if (name === 'body' && value) {

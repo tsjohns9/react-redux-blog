@@ -11,12 +11,14 @@ class ViewPost extends Component {
     this.state = { post: null, comments: null };
   }
 
+  // API call to load specific post data
   componentDidMount() {
     window.scrollTo(0, 0);
     const { id } = this.props.match.params;
     this.getOnePost(id);
   }
 
+  // Saves comment to API and redux store
   postComment = comment => {
     this.setState(() => ({ comments: [...this.state.comments, comment] }));
     API.createComment(comment)
@@ -26,12 +28,17 @@ class ViewPost extends Component {
       });
   };
 
+  // gets post from API
   getOnePost = postId => {
     API.getPostWithComments(postId)
       .then(post => {
         const { comments } = post;
+
+        // userPost is a post created by a user from the redux store
         const { userPost } = this.props;
-        console.log(this.props.userPost);
+
+        // checks if the id matches an id in the redux store. if so, then its a userPost and should be displayed
+        // merges default comments with comments left by a user if there are any
         if (this.props.comments.length) {
           this.setState({
             post: userPost ? userPost : post,

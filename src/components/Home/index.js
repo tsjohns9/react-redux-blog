@@ -13,6 +13,7 @@ class Home extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // if the page changes, searches for posts based on the new page
     if (prevProps.pageToSearch !== this.props.pageToSearch) {
       this.getPosts(this.pageToSearch());
     }
@@ -20,6 +21,7 @@ class Home extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    // gets posts based on the current page
     this.getPosts(this.pageToSearch());
   }
 
@@ -28,6 +30,7 @@ class Home extends Component {
     API.getPostsWithImages(this.pageToSearch())
       .then(result => {
         console.log(result);
+        // this.userPosts are posts created by users. joins user posts with posts retrieved from API
         this.setState({ posts: [...this.userPosts, ...result].slice(0, 9) });
       })
       .catch(error => {

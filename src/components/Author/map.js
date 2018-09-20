@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
+// used to display the users location. coordinates are passed in as props
 class SimpleMap extends Component {
   render() {
     const { geo, street } = this.props.address;

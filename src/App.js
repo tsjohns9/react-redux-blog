@@ -8,6 +8,7 @@ const store = configureStore();
 
 store.dispatch(setPage());
 
+// wraps app in the redux store
 export default class App extends Component {
   render() {
     return (

@@ -5,6 +5,7 @@ const Comment = ({ name, body }) => {
   const first = shortName[0];
   const last = shortName[1];
 
+  // sets the first and last name of the author
   const full = last
     ? first.charAt(0).toUpperCase() +
       first.slice(1) +

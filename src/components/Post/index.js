@@ -7,8 +7,7 @@ export default class Post extends Component {
     this.state = {};
   }
 
-  componentDidMount() {}
-
+  // used on the home page to display the post preview information
   render() {
     return (
       <article className="row my-5 pb-4 text-center text-md-left">

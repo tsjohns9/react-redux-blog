@@ -9,8 +9,10 @@ class Navbar extends Component {
     this.state = { reveal: false, active: this.location() };
   }
 
+  // used for displaying contact information when button is pressed
   reveal = () => this.setState({ reveal: !this.state.reveal });
 
+  // sets the active status to the nav tab
   componentDidUpdate() {
     if (this.state.active !== this.location()) {
       this.setState({

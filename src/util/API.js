@@ -1,3 +1,5 @@
+// handles all http requests to the API
+
 const API = {};
 
 API.getPosts = pageNumber => {
