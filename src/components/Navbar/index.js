@@ -24,12 +24,9 @@ class Navbar extends Component {
   render() {
     return (
       <header className="header mb-5">
-        <nav
-          style={{ fontSize: '17px' }}
-          className="navbar navbar-expand navbar-light bg-white"
-        >
-          <div className="container">
-            <Link to="/" className="navbar-brand">
+        <nav className="navbar navbar-expand  navbar-light bg-white">
+          <div className="container nav-flex">
+            <Link to="/" className="navbar-brand mb-3" style={{ fontSize: '25px' }}>
               Trevor Johnson
             </Link>
 
@@ -72,7 +69,7 @@ class Navbar extends Component {
               <h1 className="text-white">
                 {this.location() === '/about' ? 'Trevor Johnson' : 'Hire Smart'}
               </h1>
-              <p className="my-3" style={{ fontSize: '17px' }}>
+              <p className="my-3">
                 {this.location() === '/about'
                   ? 'Web Application Developer'
                   : 'Make an informed decision about the talent you want to employ'}

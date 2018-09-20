@@ -31,9 +31,9 @@ export default class About extends Component {
     console.log(this.state);
     return (
       <section className="container">
-        <h2 className="text-center mb-3">Why Me?</h2>
+        <h2 className="text-center mb-5">Why Me?</h2>
         <div className="row">
-          <div className="col-md-6 bg-1 shadow" />
+          <div className="col-md-6 bg-1 shadow mb-5" />
           <div className="col-md-6">
             <p>
               I am a web application developer with a raging hunger for success. I
@@ -63,9 +63,9 @@ export default class About extends Component {
             </p>
           </div>
         </div>
-        <h2>For Fun</h2>
+        <h2 className="my-5">For Fun</h2>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6 mb-5">
             <p>
               Apart from developing, I enjoy spending time with my family. I am the
               oldest of 6 kids, and I have a lot of cousins. In my free time I also

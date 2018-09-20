@@ -34,6 +34,7 @@
   transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out,
     ease-in-out;
   transition-delay: 0s, 0s, 0s, 0s, 0s;
+  font-size: 12px;
 }
 
 .nav-transition:hover {
@@ -43,6 +44,12 @@
 .active-nav {
   color: black !important;
   border-bottom: solid 1px black;
+}
+
+.nav-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .header-img {
@@ -116,5 +123,11 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-transition {
+    font-size: 17px;
   }
 }

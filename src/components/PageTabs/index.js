@@ -34,8 +34,8 @@ class PageTabs extends Component {
   render() {
     console.log(this.props);
     return (
-      <div>
-        <ul className="pagination mx-auto">
+      <div className="table1">
+        <ul className="pagination">
           <li onClick={this.activeTabMinusOne} className="page-item shadow-hover">
             <a className="page-link">&laquo;</a>
           </li>
