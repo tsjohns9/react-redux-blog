@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/react-redux-blog/static/css/main.5dc429bf.css",
+    "main.js": "/react-redux-blog/static/js/main.0d5e3ad6.js",
+    "static/media/ireland.JPG": "/react-redux-blog/static/media/ireland.983a6dd1a58859ceb6d2.JPG",
+    "static/media/me.jpg": "/react-redux-blog/static/media/me.b735aeb10e98bb76051d.jpg",
+    "static/media/Tempe-Town-Lake-at-Night.jpg": "/react-redux-blog/static/media/Tempe-Town-Lake-at-Night.afe0e79b037ffe746592.jpg",
+    "static/media/withmom.jpg": "/react-redux-blog/static/media/withmom.ac4a99df514726b78800.jpg",
+    "static/media/family.jpg": "/react-redux-blog/static/media/family.12a89aa5c08638ebd03b.jpg",
+    "static/media/bros.JPG": "/react-redux-blog/static/media/bros.198f1018e0f18841177a.JPG",
+    "index.html": "/react-redux-blog/index.html",
+    "main.5dc429bf.css.map": "/react-redux-blog/static/css/main.5dc429bf.css.map",
+    "main.0d5e3ad6.js.map": "/react-redux-blog/static/js/main.0d5e3ad6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5dc429bf.css",
+    "static/js/main.0d5e3ad6.js"
+  ]
+}
